@@ -58,7 +58,7 @@ export async function GET(
         return NextResponse.json({
           validated: true,
         });
-      } catch (e) {
+      } catch {
         return NextResponse.json(
           {
             message: "Internal Server Error",

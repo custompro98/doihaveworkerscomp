@@ -67,7 +67,13 @@ export async function makeMIRequest({
       },
     );
 
-    return response.data;
+    const parsed = responseSchema.safeParse(response.data);
+
+    if (!parsed.success) {
+      throw new Error(parsed.error.issues[0].message);
+    }
+
+    return parsed.data;
   } catch (e) {
     console.error("Failed to make API call for MI", e);
 
